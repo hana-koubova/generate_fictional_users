@@ -8,11 +8,11 @@ from extra import countries_dict, country_names_sorted, continents
 from random import randint
 from openpyxl import Workbook
 from io import BytesIO, StringIO, TextIOWrapper
-import json, csv
+import json, csv, os
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'sdfjLSKjLKKr9e8r9w0jhi654FGFDlkj'
+app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY')
 
 @app.route('/')
 def home():
