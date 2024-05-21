@@ -14,11 +14,11 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY')
 
-@app.route('/')
-def home():
-    return render_template('home.html')
+#@app.route('/')
+#def home():
+#    return render_template('home.html')
 
-@app.route('/generate')
+@app.route('/')
 def generate():
     return render_template('generate.html',
                            countries=countries_dict,
@@ -129,12 +129,7 @@ def download_csv():
     csv_buffer.seek(0)
     
     return csv_buffer
-    
-    
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
 
 @app.route('/fake_info')
 def fake_info():
