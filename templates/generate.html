@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row my-5">
+            <h1 class="text-center">Generate Your Fictional Users</h1>
+        </div>
+        <div class="row d-flex justify-content-center">
+
+            <form class="w-75 my-5" action="{{ url_for('results') }}" method="GET">
+
+                <!--Number of Users-->
+                <div class="mb-3">
+                    <label for="numerUsers" class="form-label">Number of Users (max 100)</label>
+                    <input type="number" class="form-control" id="numberUsers" max="100" name="numberUsers" required>
+                </div>
+
+                <h3>Location</h3>
+                
+                <!--World-->
+                <p class="my-4">
+                <input name="world" onchange="selectWorld()" class="form-check-input" type="checkbox" value="" id="checkWorld">
+                <label class="form-check-label" for="checkWorld">
+                        All Countries
+                </label>
+                </p>
+
+                <!--Continents and Countries-->
+
+
+                {% for key1, value1 in continents.items() %}
+                
+                <div class="white-div shadow-strong w-100 p-2 my-2 d-flex justify-content-between align-items-center">
+                    <div class="">
+                        <a class="btn button-dark d-flex justify-content-between align-items-center" onclick="rotate('triangle_{{value1}}')" data-bs-toggle="collapse" href="#{{value1.replace(' ', '')}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            {{value1}}
+                            <div id="triangle_{{value1}}" class="triangle-drop mx-2"></div>
+                        </a>
+                        
+                    </div>
+                    <div>
+                        <input name="{{key1}}" onchange="selectAllCont(name)" class="form-check-input check-continent" type="checkbox" value="" id="checkAll-{{key1.replace(' ', '')}}">
+                        <label class="form-check-label" for="checkAll-{{key1.replace(' ', '')}}">
+                            All
+                        </label>
+                    </div>
+                
+                </div>
+
+                <!--<h5>{{value}}</h5>-->
+
+                <div class="collapse" id="{{value1.replace(' ', '')}}">
+                    <div class="d-flex flex-wrap my-5">
+                    
+                        {% for key, value in countries[key1].items() %}
+                        <div class="form-check col m-1">
+                            <input name="{{value['faker_code']}}" class="form-check-input checkbox-{{key1.replace(' ', '')}}" type="checkbox" value="" id="{{ value.name }}">
+                            <label class="form-check-label" for="{{ value.name }}">
+                                {{ value.name }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                
+                </div>
+
+                {% endfor %}
+
+                <!--Other data-->
+                <h3 class="my-4">Include data</h3>
+
+                <!--Name automaticaly-->
+                <div class="form-check col m-1">
+                    <input class="form-check-input" type="checkbox" value="" id="user-name" name="user-name" checked disabled>
+                    <label class="form-check-label" for="user-name">
+                        User name
+                    </label>
+                </div>
+
+                <!--Optional data-->
+                {% for box in ['Address', 'Phone Number', 'Job'] %}
+                    <div class="form-check col m-1">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-{{ box.replace(' ', '') }}" name="{{ box.replace(' ', '') }}">
+                        <label class="form-check-label" for="user-name">
+                            {{ box }}
+                        </label>
+                    </div>
+
+                {% endfor %}
+                
+                <button type="submit" class="btn button-main my-5 px-3">Submit</button>
+
+            </form>
+        </div>
+
+
+<script>
+
+    const checkAll_NA = document.getElementById('checkAll-NA')
+    const cheboxes_NA = document.querySelectorAll('.checkbox-NA')
+
+    function selectAllNA() {
+        const isChecked = checkAll_NA.checked;
+        for (let i=0; i<cheboxes_NA.length; i++) {
+            cheboxes_NA[i].checked = isChecked
+            console.log("it should check")
+        }
+    }
+
+
+    function selectAllCont(cont) {
+        console.log(cont)
+        const checkAll = document.getElementById(`checkAll-${cont}`)
+        const cont_checkboxes = document.querySelectorAll(`.checkbox-${cont}`)
+        const isChecked = checkAll.checked;
+        console.log(isChecked)
+        for (let i=0; i<cont_checkboxes.length; i++) {
+            cont_checkboxes[i].checked = isChecked
+            console.log("it should check")
+
+        }
+
+    }
+
+    function selectWorld() {
+        const checkWorld = document.getElementById('checkWorld')
+        const checkboxes = document.querySelectorAll('.check-continent')
+        const isChecked = checkWorld.checked;
+        const continents = ['NA', 'SA', 'AS', 'OC', 'AF', 'EU']
+        for (let i=0; i<checkboxes.length; i++) {
+            checkboxes[i].checked = isChecked
+            selectAllCont(continents[i])
+            
+        }
+    }
+
+    function rotate(el_id) {
+        var element = document.getElementById(el_id);
+        att = element.style.transform;
+        if (att == "" || att == "rotate(0deg)") {
+            element.style.transform = 'rotate(180deg)'
+        }
+        if (att == "rotate(180deg)") {
+            element.style.transform = 'rotate(0deg)'
+        }
+    }
+
+
+ </script>
+
+{% endblock %}

@@ -1,0 +1,129 @@
+:root {
+  --orange: #f95738;
+  --light-orange: #ee964b;
+  --light-yellow: #f4d35e;
+  --white-yellow: #faf0ca;
+  --dark-blue: #0d3b66;
+  --light-blue: #0dcaf0;
+  --section-bg-color:  #f0f8ff;
+}
+
+body {
+  background-color: var(--section-bg-color);
+  color: var(--dark-blue);
+}
+
+h1 {
+  color: var(--dark-blue)
+}
+
+
+@media only screen and (max-width: 850px) {
+    .users-table thead {
+      display: none;
+  }
+  
+  .users-table td {
+      display: block;
+  }
+  
+  .users-table td::before {
+    font-weight: 600;
+  }
+  
+  .users-table td[data-th]:before  {
+      content: attr(data-th);
+  }
+  
+  .users-table .first-cell {
+    background-color: var(--light-orange);
+    color: black;
+  }
+  
+  }
+
+  .first-row {
+    --bs-table-bg: var(--light-orange);
+    --bs-table-color: white;
+  }
+
+
+.download-button {
+  background-color: var(--section-bg-color);
+  border: none;
+  margin: 5px;
+  animation-duration: 200ms;
+  display: flex;
+  justify-content: end;
+}
+
+.download-button:hover {
+  color: var(--orange);
+  animation-duration: 200ms;
+}
+
+.button-main {
+  background-color: var(--light-orange);
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  transition-duration: 200ms;
+  font-size: 1.6em;
+}
+.button-main:hover {
+  transition-duration: 200ms;
+  background-color: var(--orange)
+}
+
+.button-dark {
+  background-color: var(--dark-blue);
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 1.2em;
+  text-decoration: none;
+  border: none;
+  transition-duration: 200ms;
+}
+
+.button-dark:hover {
+  transition-duration: 200ms;
+  background-color: #165ea1;
+  color:white;
+}
+
+.white-div {
+  background: white;
+  border-radius: 5px;
+}
+
+.shadow-light {
+  -webkit-box-shadow: 1px 1px 10px 0px rgba(217,217,217,0.4);
+  -moz-box-shadow: 1px 1px 10px 0px rgba(217,217,217,0.4);
+  box-shadow: 1px 1px 10px 0px rgba(217,217,217,0.4);
+}
+
+.shadow-strong {
+  -webkit-box-shadow: 1px 1px 10px 0px rgba(217,217,217,0.6);
+    -moz-box-shadow: 1px 1px 10px 0px rgba(217,217,217,0.6);
+    box-shadow: 1px 1px 10px 0px rgba(217,217,217,0.7);
+}
+
+.shadow-strong-hover:hover {
+  box-shadow: 0 1rem 3rem rgba(0,0,0,0.1);
+  transition-duration: 200ms;
+}
+
+
+.triangle-drop {
+  width: 12px;
+  height: 12px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+  transform: rotate(0deg);
+  transition-duration: 200ms;
+  transform-origin: 6px 3px;
+  margin-top: 6px;
+}
+
