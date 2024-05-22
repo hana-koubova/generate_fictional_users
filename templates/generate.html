@@ -17,6 +17,9 @@
                 </div>
 
                 <h3>Location</h3>
+                {% if error != None %}
+                <p class="text-danger fw-bold">Pick at least one country.</p>
+                {% endif %}
                 
                 <!--World-->
                 <p class="my-4">
@@ -55,7 +58,7 @@
                     
                         {% for key, value in countries[key1].items() %}
                         <div class="form-check col m-1">
-                            <input name="{{value['faker_code']}}" class="form-check-input checkbox-{{key1.replace(' ', '')}}" type="checkbox" value="" id="{{ value.name }}">
+                            <input name="country" class="form-check-input checkbox-{{key1.replace(' ', '')}}" type="checkbox" value="{{value['faker_code']}}" id="{{ value.name }}">
                             <label class="form-check-label" for="{{ value.name }}">
                                 {{ value.name }}
                             </label>

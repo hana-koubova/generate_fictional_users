@@ -18,24 +18,34 @@ app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY')
 #def home():
 #    return render_template('home.html')
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def generate():
+    try:
+        error = request.args['error']
+    except:
+        error = None
     return render_template('generate.html',
                            countries=countries_dict,
-                           continents=continents)
+                           continents=continents,
+                           error=error)
 
-@app.route('/results')
+
+@app.route('/results', methods=['GET', 'POST'])
 def results():
     num_users = request.args['numberUsers']
     all_keys = [i for i in request.args.keys()]
+    countries = request.args.getlist('country')
+    if len(countries) == 0:
+        error = 'missing'
+        return redirect(url_for('generate',
+                                error=error))
+    #print(countries)
     #print(all_keys)
-    countries = []
+    #countries = []
     other_keys = []
     for key in all_keys:
-        if key in ('numberUsers', 'EU', 'NA', 'SA', 'AS', 'OC', 'AF', 'world'):
+        if key in ('numberUsers', 'EU', 'NA', 'SA', 'AS', 'OC', 'AF', 'world', 'country'):
             continue
-        if len(key) == 5 and '_' in key:
-            countries.append(key)
         else:
             other_keys.append(key)
     
